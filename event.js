@@ -64,4 +64,60 @@ const ReactEvents = {
     }
     return false;
   };
+
+const preventFunc = (e) => {
+  e.preventDefault();
+}
+
+/**
+ * 阻止触摸移动时页面随着滑动
+ * @returns Object
+ */
+export const preventDefaultMove = function () {
+  if ("ontouchmove" in document) {
+    document.addEventListener("touchmove", preventFunc, {
+      passive: false
+    });
+  } else {
+    return null;
+  }
+  const cancel = function () {
+    document.removeEventListener("touchmove", preventFunc, {
+      passive: false
+    });
+  }
+  return { cancel }
+}
+
+/**
+ * 判断事件是否为鼠标触发
+ * @param {Event} e 
+ * @returns 
+ */
+export const isMouseEvent = function(e) {
+  if (e instanceof MouseEvent) {
+    return true;
+  }
+  if (e instanceof PointerEvent && e.pointerType === 'mouse') {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * 判断事件是否为触摸触发
+ * @param { Event } e 
+ * @returns Boolean
+ */
+export const isTouchEvent = function(e) {
+  if (e instanceof TouchEvent) {
+    return true;
+  }
+
+  if (e instanceof PointerEvent && e.pointerType === 'touch') {
+    return true;
+  }
+  return false;
+}
+
   
