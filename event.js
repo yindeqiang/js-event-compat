@@ -95,10 +95,10 @@ export const preventDefaultMove = function () {
  * @returns 
  */
 export const isMouseEvent = function(e) {
-  if (e instanceof MouseEvent) {
+  if (e.type.indexOf('mouse') === 0) {
     return true;
   }
-  if (e instanceof PointerEvent && e.pointerType === 'mouse') {
+  if (e.type.indexOf('pointer') === 0 && e.pointerType === 'mouse') {
     return true;
   }
   return false;
@@ -110,14 +110,12 @@ export const isMouseEvent = function(e) {
  * @returns Boolean
  */
 export const isTouchEvent = function(e) {
-  if (e instanceof TouchEvent) {
+  if (e.type.indexOf('touch') === 0) {
     return true;
   }
 
-  if (e instanceof PointerEvent && e.pointerType === 'touch') {
+  if (e.type.indexOf('pointer') === 0 && e.pointerType === 'touch') {
     return true;
   }
   return false;
 }
-
-  
